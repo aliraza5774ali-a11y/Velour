@@ -1,81 +1,22 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './authSlice';
+import uiReducer from './uiSlice';
+import cartReducer from './cartSlice';
 
-// Constants
-const INITIAL_CART = [
-  { id: 1, name: "Arctic Puffer Jacket", color: "Ivory", size: "M", price: 189, qty: 1, img: "https://framerusercontent.com/images/g813yVl0fq2gEobS7kOZx537SY.jpg" },
-  { id: 2, name: "Urban Layer Coat", color: "Charcoal", size: "L", price: 245, qty: 1, img: "https://framerusercontent.com/images/Or4CSjqekPU2Ug6V0zSDTbgtg.jpg" },
-];
-
-// Cart Slice
-const cartSlice = createSlice({
-  name: 'cart',
-  initialState: { items: INITIAL_CART },
-  reducers: {
-    updateQty: (state, action) => {
-      const { id, delta } = action.payload;
-      state.items = state.items.map((i) => 
-        i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i
-      );
-    },
-    removeItem: (state, action) => {
-      state.items = state.items.filter((i) => i.id !== action.payload);
-    },
-    addItem: (state, action) => {
-      state.items.push(action.payload);
-    },
-    clearCart: (state) => {
-      state.items = [];
-    },
-  },
-});
-
-// Auth Slice
-const authSlice = createSlice({
-  name: 'auth',
-  initialState: { isLoggedIn: false, user: null },
-  reducers: {
-    signIn: (state) => {
-      state.isLoggedIn = true;
-      state.user = { name: "Alex Kim", email: "alex.kim@email.com", avatar: "AK" };
-    },
-    signOut: (state) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    },
-  },
-});
-
-// UI Slice
-const uiSlice = createSlice({
-  name: 'ui',
-  initialState: { 
-    cartOpen: false, 
-    dashOpen: false, 
-    searchOpen: false, 
-    isScrolled: false 
-  },
-  reducers: {
-    setCartOpen: (state, action) => { state.cartOpen = action.payload; },
-    setDashOpen: (state, action) => { state.dashOpen = action.payload; },
-    setSearchOpen: (state, action) => { state.searchOpen = action.payload; },
-    setIsScrolled: (state, action) => { state.isScrolled = action.payload; },
-    closeAllOverlays: (state) => {
-      state.cartOpen = false;
-      state.dashOpen = false;
-      state.searchOpen = false;
-    },
-  },
-});
-
+// Bug fix: original file referenced `authReducer` without ever
+// importing it, and only had one slice — but Navbar needs
+// state.auth, state.ui, and state.cart all to exist.
 export const store = configureStore({
   reducer: {
-    cart: cartSlice.reducer,
-    auth: authSlice.reducer,
-    ui: uiSlice.reducer,
+    auth: authReducer,
+    ui: uiReducer,
+    cart: cartReducer,
   },
 });
 
-// Export actions
-export const { updateQty, removeItem, addItem, clearCart } = cartSlice.actions;
-export const { signIn, signOut } = authSlice.actions;
-export const { setCartOpen, setDashOpen, setSearchOpen, setIsScrolled, closeAllOverlays } = uiSlice.actions;
+// Re-export so existing imports like:
+//   import { setCartOpen, setSearchOpen, setDashOpen } from '../store';
+// keep working without changing Navbar.jsx at all.
+export { setCartOpen, setSearchOpen, setDashOpen, setScrolled, closeAllOverlays } from './uiSlice';
+export { setLoading, setUser, setToken, logout, signOut, setError } from './authSlice';
+export { setCartItems, updateQty, removeItem } from './cartSlice';

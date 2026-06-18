@@ -2,7 +2,7 @@ import { useAppDispatch } from '../hooks/useRedux';
 import { updateQty, removeItem } from '../store';
 import QtyButton from './QtyButton';
 
-export default function CartItem({ item }) {
+export default function CarItem({ item }) {
   const dispatch = useAppDispatch();
 
   return (

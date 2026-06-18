@@ -303,18 +303,18 @@ export default function HeroSection() {
       </div>
 
       {/* ── Scanline ── */}
-      {/* <div
+      <div
         ref={scanlineRef}
         className="absolute left-0 right-0 h-px z-20 pointer-events-none"
         style={{
           top: '50%',
           background: 'linear-gradient(90deg,transparent 0%,rgba(201,169,110,0.6) 40%,rgba(201,169,110,0.9) 50%,rgba(201,169,110,0.6) 60%,transparent 100%)',
         }}
-      /> */}
+      />
 
       {/* ── Left content ── */}
       <div ref={contentRef} className="relative z-10 w-full max-w-[680px] px-20">
-        {/* <div
+        <div
           ref={tagRef}
           className="flex items-center gap-[10px] mb-9"
           style={{ opacity: 0, transform: 'translateY(12px)' }}
@@ -326,9 +326,9 @@ export default function HeroSection() {
           <span className="text-[10px] tracking-[0.1em] text-white/30 ml-auto">
             {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
           </span>
-        </div> */}
+        </div>
 
-        {/* <div className="mb-2">
+        <div className="mb-2">
           <div className="overflow-hidden">
             <span ref={hl1Ref}
               className="block font-['Playfair_Display'] text-[clamp(44px,5.5vw,76px)] font-bold leading-[1.02] text-white"
@@ -350,17 +350,17 @@ export default function HeroSection() {
               living.
             </span>
           </div>
-        </div> */}
+        </div>
 
-        {/* <p
+        <p
           ref={bodyRef}
           className="text-[14px] text-white/50 leading-[1.8] max-w-[360px] mb-10 font-normal"
           style={{ opacity: 0, transform: 'translateY(10px)' }}
         >
           Discover our new range of soft clothes made for your daily look — crafted from the finest natural fabrics.
-        </p> */}
+        </p>
 
-        {/* <div
+        <div
           ref={btnsRef}
           className="flex items-center gap-3"
           style={{ opacity: 0, transform: 'translateY(10px)' }}
@@ -371,15 +371,15 @@ export default function HeroSection() {
           <button className="h-[46px] px-7 bg-transparent text-white text-[11px] font-semibold tracking-[0.1em] uppercase border border-white/[0.18] rounded-full cursor-pointer transition-all duration-250 hover:border-white/50 hover:bg-white/[0.06]">
             Our story
           </button>
-        </div> */}
+        </div>
       </div>
 
       {/* ── Slide counter top-right ── */}
-      {/* <div className="absolute top-9 right-8 z-10 flex items-center gap-2 text-[11px] text-white/30 tracking-[0.1em]">
+      <div className="absolute top-9 right-8 z-10 flex items-center gap-2 text-[11px] text-white/30 tracking-[0.1em]">
         <span className="text-white text-[14px] font-semibold">{String(current + 1).padStart(2, '0')}</span>
         <span className="w-6 h-px bg-white/20" />
         <span>{String(SLIDES.length).padStart(2, '0')}</span>
-      </div> */}
+      </div>
 
       {/* ── Arch thumbnail preview ── */}
       <ArchPreview

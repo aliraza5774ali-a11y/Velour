@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
-import { updateQty, removeItem, setCartOpen } from '../store';
-import CartItem from './CarItem';
+import { setCartOpen } from '../store';
+import CarItem from './CarItem';
 
 import { CloseIcon } from '../assets/icons/index';
 
@@ -14,7 +14,7 @@ export default function CartPanel() {
 
   return (
     <>
-      <div onClick={() => dispatch(setCartOpen(false))} className={`fixed inset-0 bg-black/60 z-[200] transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`} />
+      <div className={`fixed inset-0 bg-black/60 z-[200] transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={() => dispatch(setCartOpen(false))} />
       <div className={`fixed top-0 right-0 bottom-0 w-[380px] bg-[#111] border-l border-white/[0.08] z-[300] flex flex-col transition-transform duration-350 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
         <div className="px-6 py-6 border-b border-white/[0.06] flex items-center justify-between">
           <span className="text-base font-semibold tracking-[0.04em]">
@@ -28,7 +28,7 @@ export default function CartPanel() {
             <p className="text-center py-16 text-white/25 text-[14px]">Your bag is empty</p>
           ) : (
             cartItems.map((item) => (
-              <CartItem key={item.id} item={item} />
+              <CarItem key={item.id} item={item} />
             ))
           )}
         </div>
